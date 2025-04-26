@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  telegram-authentik-proxy:
+    build: .
+    container_name: telegram-authentik-proxy
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_API_ID=${TELEGRAM_API_ID}
+      - TELEGRAM_API_HASH=${TELEGRAM_API_HASH}
+      - TELEGRAM_BOT_USERNAME=${TELEGRAM_BOT_USERNAME}
+      - AUTHENTIK_URL=${AUTHENTIK_URL}
+      - AUTHENTIK_API_TOKEN=${AUTHENTIK_API_TOKEN}
+      - AUTHENTIK_OAUTH_CLIENT_ID=${AUTHENTIK_OAUTH_CLIENT_ID}
+      - AUTHENTIK_OAUTH_CLIENT_SECRET=${AUTHENTIK_OAUTH_CLIENT_SECRET}
+      - AUTHENTIK_REDIRECT_URI=${AUTHENTIK_REDIRECT_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - SESSION_SECRET=${SESSION_SECRET}
+    volumes:
+      - ./logs:/app/logs
