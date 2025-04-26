@@ -23,10 +23,10 @@ const authentikClient = axios.create({
  */
 exports.findUserByTelegramUsername = async (telegramUsername) => {
   try {
-    // Сначала ищем по атрибуту t_username
+    // Сначала ищем по атрибуту telegram_username
     const attributeResponse = await authentikClient.get('/core/users/', {
       params: {
-        attributes: `t_username=${telegramUsername}`
+        attributes: `telegram_username=${telegramUsername}`
       }
     });
 
@@ -67,7 +67,7 @@ exports.createUserFromTelegram = async (telegramData) => {
       name: `${first_name || ''} ${last_name || ''}`.trim(),
       is_active: true,
       attributes: {
-        t_username: username,
+        telegram_username: username,
         telegram_id: id,
         telegram_photo_url: photo_url
       }
