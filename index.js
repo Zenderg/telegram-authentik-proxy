@@ -22,6 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Authorization Endpoint
 app.get('/auth', (req, res) => {
   const { redirect_uri, state } = req.query;
+  console.log(`redirect_uri: ${redirect_uri}`);
+  console.log(`state: ${state}`);
   
   res.send(`
     <html>
@@ -33,7 +35,7 @@ app.get('/auth', (req, res) => {
           lang: 'en',
           return_to: '${redirect_uri}'
         }, function(data) {
-          fetch('/callback', {
+          fetch('/telegram-auth/callback', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
